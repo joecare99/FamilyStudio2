@@ -19,7 +19,7 @@ namespace FamilyStudioFormsGui.WindowsGui.Panels.ComparePanel1
   class ComparePanel1 : TreeViewPanelBaseClass
   {
     private static TraceSource trace = new TraceSource("ComparePanel1", SourceLevels.Warning);
-    private FamilyTreeStoreBaseClass familyTree;
+    private IFamilyTreeStoreBaseClass familyTree;
     private IList<Control> controlList;
     private FamilyForm2 parentForm;
     private ComboBox searchTextBox;
@@ -210,7 +210,7 @@ namespace FamilyStudioFormsGui.WindowsGui.Panels.ComparePanel1
 
 
 
-    public override void SetFamilyTree(FamilyTreeStoreBaseClass inFamilyTree)
+    public override void SetFamilyTree(IFamilyTreeStoreBaseClass inFamilyTree)
     {
       trace.TraceInformation("ComparePanel1::SetFamilyTree():" + DateTime.Now);
 

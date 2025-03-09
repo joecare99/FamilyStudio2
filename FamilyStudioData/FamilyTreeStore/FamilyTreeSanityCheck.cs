@@ -71,7 +71,7 @@ namespace FamilyStudioData.FamilyTreeStore
       }
     }
 
-    static public IndividualStatus CheckCorrectness(FamilyTreeStoreBaseClass familyTree, IndividualClass person)
+    static public IndividualStatus CheckCorrectness(IFamilyTreeStoreBaseClass familyTree, IndividualClass person)
     {
       IndividualStatus status = new IndividualStatus();
 
@@ -324,7 +324,7 @@ namespace FamilyStudioData.FamilyTreeStore
     {
       return this.type + ":" + this.personXref;
     }
-    public string ToString(FamilyTreeStoreBaseClass familyTree, bool showRelation, bool html)
+    public string ToString(IFamilyTreeStoreBaseClass familyTree, bool showRelation, bool html)
     {
       IndividualClass person = familyTree.GetIndividual(personXref);
       StringBuilder builder = new StringBuilder();
@@ -432,7 +432,7 @@ namespace FamilyStudioData.FamilyTreeStore
   [CollectionDataContract]
   public class RelationStack : List<Relation>
   {
-    public string ToString(FamilyTreeStoreBaseClass familyTree, bool html)
+    public string ToString(IFamilyTreeStoreBaseClass familyTree, bool html)
     {
       StringBuilder strBuilder = new StringBuilder();
       strBuilder.Append(CalculateRelation(familyTree, html) + Linefeed(html));
@@ -527,7 +527,7 @@ namespace FamilyStudioData.FamilyTreeStore
         this.RemoveAt(this.Count - 1);
       }
     }
-    public string CalculateRelation(FamilyTreeStoreBaseClass familyTree, bool html)
+    public string CalculateRelation(IFamilyTreeStoreBaseClass familyTree, bool html)
     {
       int rootIndex = 0;
 
@@ -692,7 +692,7 @@ namespace FamilyStudioData.FamilyTreeStore
       return FamilyUtility.GetLinefeed();
     }
 
-    public string ToString(FamilyTreeStoreBaseClass familyTree, bool html)
+    public string ToString(IFamilyTreeStoreBaseClass familyTree, bool html)
     {
       StringBuilder strBuilder = new StringBuilder();
 
@@ -892,7 +892,7 @@ namespace FamilyStudioData.FamilyTreeStore
     private static TraceSource trace = new TraceSource("Sanity:AncestorStatistics", SourceLevels.Warning);
     [DataMember]
     private IDictionary<string, AncestorLineInfo> ancestorList;
-    private FamilyTreeStoreBaseClass familyTree;
+    private IFamilyTreeStoreBaseClass familyTree;
     [DataMember]
     private int people, duplicatePeople;
     [DataMember]
@@ -932,7 +932,7 @@ namespace FamilyStudioData.FamilyTreeStore
 
     public const int AllGenerations = 1000;
 
-    public AncestorStatistics(FamilyTreeStoreBaseClass familyTree, SanityCheckLimits limits, int ancestorGenerations = AllGenerations, int descendantGenerations = 0, ProgressReporterInterface progressReporter = null, AncestorUpdate updateCallback = null)
+    public AncestorStatistics(IFamilyTreeStoreBaseClass familyTree, SanityCheckLimits limits, int ancestorGenerations = AllGenerations, int descendantGenerations = 0, ProgressReporterInterface progressReporter = null, AncestorUpdate updateCallback = null)
     {
       this.familyTree = familyTree;
       this.descendantGenerationNo = descendantGenerations;
@@ -982,11 +982,11 @@ namespace FamilyStudioData.FamilyTreeStore
       return descendantGenerationNo;
     }
 
-    public FamilyTreeStoreBaseClass GetFamilyTree()
+    public IFamilyTreeStoreBaseClass GetFamilyTree()
     {
       return familyTree;
     }
-    public void SetFamilyTree(FamilyTreeStoreBaseClass tree)
+    public void SetFamilyTree(IFamilyTreeStoreBaseClass tree)
     {
       familyTree = tree;
     }
@@ -1792,7 +1792,7 @@ namespace FamilyStudioData.FamilyTreeStore
       return "";
     }
 
-    private void ReportMatchingProfiles(FamilyTreeStoreBaseClass familyTree1, string person1, FamilyTreeStoreBaseClass familyTree2, string person2)
+    private void ReportMatchingProfiles(IFamilyTreeStoreBaseClass familyTree1, string person1, IFamilyTreeStoreBaseClass familyTree2, string person2)
     {
       IndividualClass person1full = familyTree1.GetIndividual(person1);
       IndividualClass person2full = familyTree2.GetIndividual(person2);
@@ -2218,7 +2218,7 @@ namespace FamilyStudioData.FamilyTreeStore
 
     }
 
-    public CheckRelation(FamilyTreeStoreBaseClass familyTree, string xrefPerson1, string xrefPerson2, int noOfGenerations, ref RelationStackList relationList, ProgressReporterInterface progress)
+    public CheckRelation(IFamilyTreeStoreBaseClass familyTree, string xrefPerson1, string xrefPerson2, int noOfGenerations, ref RelationStackList relationList, ProgressReporterInterface progress)
     {
       if (familyTree != null)
       {
@@ -2342,7 +2342,7 @@ namespace FamilyStudioData.FamilyTreeStore
     }
 
 
-    private void LoadAncestors(FamilyTreeStoreBaseClass familyTree, IndividualClass person, ref IDictionary<string, RelationStack> ancestors, int generations, Relation.Type relation, RelationStack relationStack, double startProgress, ProgressReporterInterface progressReporter, string progressDescription)
+    private void LoadAncestors(IFamilyTreeStoreBaseClass familyTree, IndividualClass person, ref IDictionary<string, RelationStack> ancestors, int generations, Relation.Type relation, RelationStack relationStack, double startProgress, ProgressReporterInterface progressReporter, string progressDescription)
     {
       double progress = startProgress;
       trace.TraceInformation("LoadAncestors(" + person.GetName() + "," + generations + "," + ancestors.Count + ")");

@@ -15,7 +15,7 @@ namespace FamilyStudioFormsGui.WindowsGui.Forms
   public partial class FamilySearchForm : Form
   {
     private static TraceSource trace = new TraceSource("FamilySearchForm", SourceLevels.Warning);
-    private FamilyTreeStoreBaseClass m_familyTree;
+    private IFamilyTreeStoreBaseClass m_familyTree;
     public FamilySearchForm()
     {
       InitializeComponent();
@@ -58,7 +58,7 @@ namespace FamilyStudioFormsGui.WindowsGui.Forms
 
     }
 
-    public void SetFamilyStore(FamilyTreeStoreBaseClass familyTree)
+    public void SetFamilyStore(IFamilyTreeStoreBaseClass familyTree)
     {
       m_familyTree = familyTree;
     }

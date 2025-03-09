@@ -44,7 +44,7 @@ namespace FamilyStudioFormsGui.WindowsGui.Forms
   {
     private IList<TreeViewPanelBaseClass> panelList;
     private String filename;
-    private FamilyTreeStoreBaseClass familyTree;
+    private IFamilyTreeStoreBaseClass familyTree;
     private IndividualClass selectedIndividual;
     private IList<string> searchResultXrefList;
     //private IList<Type> typeList;
@@ -97,7 +97,7 @@ namespace FamilyStudioFormsGui.WindowsGui.Forms
       nextPersonTabToAdd++;
     }
 
-    private void ConnectPanelsToTree(FamilyTreeStoreBaseClass tree)
+    private void ConnectPanelsToTree(IFamilyTreeStoreBaseClass tree)
     {
       foreach (TreeViewPanelBaseClass panel in panelList)
       {
@@ -612,7 +612,7 @@ namespace FamilyStudioFormsGui.WindowsGui.Forms
       return result;
     }
 
-    public bool DownloadImages2(FamilyTreeStoreBaseClass tree)
+    public bool DownloadImages2(IFamilyTreeStoreBaseClass tree)
     {
 
       IEnumerator<IndividualClass> individualIterator = tree.SearchPerson();
@@ -719,7 +719,7 @@ namespace FamilyStudioFormsGui.WindowsGui.Forms
       }
     }
 
-    public FamilyTreeStoreBaseClass GetTree()
+    public IFamilyTreeStoreBaseClass GetTree()
     {
       return familyTree;
     }
@@ -754,7 +754,7 @@ namespace FamilyStudioFormsGui.WindowsGui.Forms
   {
     private BackgroundWorker backgroundWorker;
     private DateTime startTime;
-    private FamilyTreeStoreBaseClass familyTree;
+    private IFamilyTreeStoreBaseClass familyTree;
     string workerFileName;
     ProgressReporterInterface progressReporter;
     private TraceSource trace;
@@ -765,7 +765,7 @@ namespace FamilyStudioFormsGui.WindowsGui.Forms
       object sender, 
       ProgressReporterInterface progress, 
       string filename, 
-      ref FamilyTreeStoreBaseClass tree,
+      ref IFamilyTreeStoreBaseClass tree,
       CompletedCallback callback)
     {
       trace = new TraceSource("ReadFileWorker", SourceLevels.Warning);
@@ -817,7 +817,7 @@ namespace FamilyStudioFormsGui.WindowsGui.Forms
       trace.TraceInformation("ReadFileWorker::DoWork(" + workerFileName + ")" + DateTime.Now);
     }
 
-    public FamilyTreeStoreBaseClass GetFamilyTree()
+    public IFamilyTreeStoreBaseClass GetFamilyTree()
     {
       return familyTree;
     }
@@ -869,7 +869,7 @@ namespace FamilyStudioFormsGui.WindowsGui.Forms
   {
     private BackgroundWorker backgroundWorker;
     private DateTime startTime;
-    private FamilyTreeStoreBaseClass familyTree;
+    private IFamilyTreeStoreBaseClass familyTree;
     private string workerFileName;
     private ProgressReporterInterface progressReporter;
     private string progressString;
@@ -883,7 +883,7 @@ namespace FamilyStudioFormsGui.WindowsGui.Forms
       string filename,
       FamilyFileTypeOperation operation,
       int filterIndex,
-      ref FamilyTreeStoreBaseClass tree)
+      ref IFamilyTreeStoreBaseClass tree)
     {
       trace = new TraceSource("WriteFileWorker", SourceLevels.Warning);
       trace.TraceInformation("WriteFileWorker(" + filename + ")" + DateTime.Now);

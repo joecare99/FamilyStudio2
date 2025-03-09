@@ -22,7 +22,7 @@ namespace FamilyStudioFormsGui.WindowsGui.Panels.CompletenessViewPanel1
 
   class CompletenessViewPanel1 : TreeViewPanelBaseClass
   {
-    private FamilyTreeStoreBaseClass familyTree;
+    private IFamilyTreeStoreBaseClass familyTree;
     private IndividualClass selectedIndividual;
     private IList<Control> controlList;
     private FamilyForm2 parentForm;
@@ -385,7 +385,7 @@ namespace FamilyStudioFormsGui.WindowsGui.Panels.CompletenessViewPanel1
       fileDlg.Filter = "Stats List|*.fss";
       fileDlg.InitialDirectory = utility.GetCurrentDirectory();
 
-      if (fileDlg.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+      if (fileDlg.ShowDialog(this) == DialogResult.OK)
       {
         SaveListToFile(fileDlg.FileName);
       }
@@ -397,7 +397,7 @@ namespace FamilyStudioFormsGui.WindowsGui.Panels.CompletenessViewPanel1
       fileDlg.Filter = "Text file|*.txt";
       fileDlg.InitialDirectory = utility.GetCurrentDirectory();
 
-      if (fileDlg.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+      if (fileDlg.ShowDialog(this) == DialogResult.OK)
       {
         ExportListText(fileDlg.FileName);
       }
@@ -409,7 +409,7 @@ namespace FamilyStudioFormsGui.WindowsGui.Panels.CompletenessViewPanel1
       fileDlg.Filter = "Html file|*.html";
       fileDlg.InitialDirectory = utility.GetCurrentDirectory();
 
-      if (fileDlg.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+      if (fileDlg.ShowDialog(this) == DialogResult.OK)
       {
         ExportListHtml(fileDlg.FileName);
       }
@@ -417,9 +417,10 @@ namespace FamilyStudioFormsGui.WindowsGui.Panels.CompletenessViewPanel1
 
     void ResultList_Url_Click(object sender, EventArgs e)
     {
-      if (sender.GetType() == typeof(MenuItem))
+      // TODO ToolStripMenuItem wird nicht mehr unterstützt. Verwenden Sie stattdessen ToolStripMenuItem. Weitere Informationen finden Sie unter: https://docs.microsoft.com/en-us/dotnet/core/compatibility/winforms#removed-controls
+      if (sender.GetType() == typeof(ToolStripMenuItem))
       {
-        MenuItem clickedItem = (MenuItem)sender;
+        ToolStripMenuItem clickedItem = (ToolStripMenuItem)sender;
         //parent.AddRelative(AsyncTreePanel1.RelativeType.Child);
         Process.Start(clickedItem.Text);
       }
@@ -428,14 +429,19 @@ namespace FamilyStudioFormsGui.WindowsGui.Panels.CompletenessViewPanel1
 
     private void ResultList_MouseUp(object sender, MouseEventArgs e)
     {
-      if (e.Button == System.Windows.Forms.MouseButtons.Right)
+      if (e.Button == MouseButtons.Right)
       {
-        ContextMenu menu = new ContextMenu();
+        // TODO ContextMenuStrip wird nicht mehr unterstützt. Verwenden Sie stattdessen ContextMenuStrip. Weitere Informationen finden Sie unter: https://docs.microsoft.com/en-us/dotnet/core/compatibility/winforms#removed-controls
+        ContextMenuStrip menu = new ContextMenuStrip();
 
-        menu.MenuItems.Add(new MenuItem("Open...", ResultList_Open_Click));
-        menu.MenuItems.Add(new MenuItem("Save...", ResultList_Save_Click));
-        menu.MenuItems.Add(new MenuItem("Export text...", ResultList_ExportText_Click));
-        menu.MenuItems.Add(new MenuItem("Export HTML...", ResultList_ExportHtml_Click));
+        // TODO ToolStripMenuItem wird nicht mehr unterstützt. Verwenden Sie stattdessen ToolStripMenuItem. Weitere Informationen finden Sie unter: https://docs.microsoft.com/en-us/dotnet/core/compatibility/winforms#removed-controls
+        menu.Items.Add(new ToolStripMenuItem("Open...",null, ResultList_Open_Click));
+        // TODO ToolStripMenuItem wird nicht mehr unterstützt. Verwenden Sie stattdessen ToolStripMenuItem. Weitere Informationen finden Sie unter: https://docs.microsoft.com/en-us/dotnet/core/compatibility/winforms#removed-controls
+        menu.Items.Add(new ToolStripMenuItem("Save...", null, ResultList_Save_Click));
+        // TODO ToolStripMenuItem wird nicht mehr unterstützt. Verwenden Sie stattdessen ToolStripMenuItem. Weitere Informationen finden Sie unter: https://docs.microsoft.com/en-us/dotnet/core/compatibility/winforms#removed-controls
+        menu.Items.Add(new ToolStripMenuItem("Export text...", null, ResultList_ExportText_Click));
+        // TODO ToolStripMenuItem wird nicht mehr unterstützt. Verwenden Sie stattdessen ToolStripMenuItem. Weitere Informationen finden Sie unter: https://docs.microsoft.com/en-us/dotnet/core/compatibility/winforms#removed-controls
+        menu.Items.Add(new ToolStripMenuItem("Export HTML...", null, ResultList_ExportHtml_Click));
 
         if (parentForm != null)
         {
@@ -450,7 +456,8 @@ namespace FamilyStudioFormsGui.WindowsGui.Panels.CompletenessViewPanel1
               {
                 foreach (string url in urlList)
                 {
-                  menu.MenuItems.Add(new MenuItem(url, ResultList_Url_Click));
+                  // TODO ToolStripMenuItem wird nicht mehr unterstützt. Verwenden Sie stattdessen ToolStripMenuItem. Weitere Informationen finden Sie unter: https://docs.microsoft.com/en-us/dotnet/core/compatibility/winforms#removed-controls
+                  menu.Items.Add(new ToolStripMenuItem(url, null, ResultList_Url_Click));
                 }
               }
             }
@@ -466,7 +473,8 @@ namespace FamilyStudioFormsGui.WindowsGui.Panels.CompletenessViewPanel1
 
                 foreach (string duplicate in selected.duplicate)
                 {
-                  menu.MenuItems.Add(new MenuItem(duplicate, ResultList_Url_Click));
+                  // TODO ToolStripMenuItem wird nicht mehr unterstützt. Verwenden Sie stattdessen ToolStripMenuItem. Weitere Informationen finden Sie unter: https://docs.microsoft.com/en-us/dotnet/core/compatibility/winforms#removed-controls
+                  menu.Items.Add(new ToolStripMenuItem(duplicate, null, ResultList_Url_Click));
                 }
               }
               else
@@ -476,7 +484,7 @@ namespace FamilyStudioFormsGui.WindowsGui.Panels.CompletenessViewPanel1
             }
           }
         }
-        menu.Show(this, e.Location, LeftRightAlignment.Right);
+        menu.Show(this, e.Location, ToolStripDropDownDirection.Right);
       }
     }
 
@@ -490,7 +498,7 @@ namespace FamilyStudioFormsGui.WindowsGui.Panels.CompletenessViewPanel1
       fileDlg.Filter = "Stats List|*.fss";
       fileDlg.InitialDirectory = utility.GetCurrentDirectory();
 
-      if (fileDlg.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+      if (fileDlg.ShowDialog(this) == DialogResult.OK)
       {
         SaveListToFile(fileDlg.FileName);
       }
@@ -502,7 +510,7 @@ namespace FamilyStudioFormsGui.WindowsGui.Panels.CompletenessViewPanel1
       fileDlg.Filter = "Text file|*.txt";
       fileDlg.InitialDirectory = utility.GetCurrentDirectory();
 
-      if (fileDlg.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+      if (fileDlg.ShowDialog(this) == DialogResult.OK)
       {
         ExportListText(fileDlg.FileName);
       }
@@ -514,7 +522,7 @@ namespace FamilyStudioFormsGui.WindowsGui.Panels.CompletenessViewPanel1
       fileDlg.Filter = "HTML file|*.html";
       fileDlg.InitialDirectory = utility.GetCurrentDirectory();
 
-      if (fileDlg.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+      if (fileDlg.ShowDialog(this) == DialogResult.OK)
       {
         ExportListHtml(fileDlg.FileName);
       }
@@ -526,7 +534,7 @@ namespace FamilyStudioFormsGui.WindowsGui.Panels.CompletenessViewPanel1
       fileDlg.Filter = "Stats List|*.fss";
       fileDlg.InitialDirectory = utility.GetCurrentDirectory();
 
-      if (fileDlg.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+      if (fileDlg.ShowDialog(this) == DialogResult.OK)
       {
         DataContractSerializer serializer = new DataContractSerializer(typeof(AncestorStatistics));
 
@@ -764,7 +772,7 @@ namespace FamilyStudioFormsGui.WindowsGui.Panels.CompletenessViewPanel1
 
 
 
-    public override void SetFamilyTree(FamilyTreeStoreBaseClass inFamilyTree)
+    public override void SetFamilyTree(IFamilyTreeStoreBaseClass inFamilyTree)
     {
       trace.TraceInformation("CompletenessViewPanel1::SetFamilyTree():" + DateTime.Now);
 

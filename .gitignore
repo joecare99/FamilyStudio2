@@ -1,0 +1,17 @@
+﻿################################################################################
+# Diese .gitignore-Datei wurde von Microsoft(R) Visual Studio automatisch erstellt.
+################################################################################
+
+/.vs
+/bin
+/FamilyStudioData/.vs
+/FamilyStudioFormsGui/.vs
+/FamilyStudioWebBrowser/.vs
+/FileFormats/AnarkivCodec/.vs
+/FileFormats/GedcomCodec/.vs
+/FileFormats/GeniCodec/.vs
+/FileFormats/MyHeritageCodec/.vs
+/FileFormats/TextCodec/.vs
+/obj
+/FamilyStudio2.sln.bak
+/Directory.Packages.props.bak

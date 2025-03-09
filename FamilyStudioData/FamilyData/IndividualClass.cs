@@ -254,6 +254,7 @@ namespace FamilyStudioData.FamilyData
       PermanentRecordFileNumber,
       AutomatedRecordId,
       AncestralFileNumber,
+      UniversalRecordId,
       UserReferenceNumber
     }
 
@@ -615,7 +616,7 @@ namespace FamilyStudioData.FamilyData
       this.isAlive = isAlive;
     }
 
-    public bool Validate(FamilyTreeStoreBaseClass familyTree, ref ValidationData validationData, String callerXrefId = null) // IList<IndividualClass> individualList)
+    public bool Validate(IFamilyTreeStoreBaseClass familyTree, ref ValidationData validationData, String callerXrefId = null) // IList<IndividualClass> individualList)
     {
       bool allFound = true;
       bool callerFound = (callerXrefId == null);

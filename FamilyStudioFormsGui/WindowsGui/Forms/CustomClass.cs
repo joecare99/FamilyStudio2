@@ -18,7 +18,7 @@ namespace FamilyStudioFormsGui.WindowsGui.Forms
 		/// <param name="Value"></param>
 		public void Add(CustomProperty Value)
 		{
-			base.List.Add(Value);
+            List.Add(Value);
 		}
 
 		/// <summary>
@@ -27,11 +27,11 @@ namespace FamilyStudioFormsGui.WindowsGui.Forms
 		/// <param name="Name"></param>
 		public void Remove(string Name)
 		{
-			foreach(CustomProperty prop in base.List)
+			foreach(CustomProperty prop in List)
 			{
 				if(prop.Name == Name)
 				{
-					base.List.Remove(prop);
+                    List.Remove(prop);
 					return;
 				}
 			}
@@ -48,12 +48,12 @@ namespace FamilyStudioFormsGui.WindowsGui.Forms
         {
           Console.WriteLine("CustomProperty.get(" + index + " of " + List.Count + ")");
         }
-        return (CustomProperty)base.List[index];
+        return (CustomProperty)List[index];
 			}
 			set
 			{
         Console.WriteLine("CustomProperty.set(" + index + " of " + List.Count + ")");
-        base.List[index] = (CustomProperty)value;
+                List[index] = (CustomProperty)value;
 			}
 		}
 

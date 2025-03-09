@@ -10,7 +10,7 @@ using System.Diagnostics;
 using FamilyStudioData.FamilyTreeStore;
 //using FamilyStudioFormsGui.WindowsGui;
 using FamilyStudioFormsGui.WindowsGui.Forms;
-using System.Deployment.Application;
+// TODO Obwohl ClickOnce in .NET 5 und höher unterstützt wird, haben Apps keinen Zugriff auf den System.Deployment.Application Namespace. Weitere Informationen finden Sie unter https://github.com/dotnet/deployment-tools/issues/27 und https://github.com/dotnet/deployment-tools/issues/53.
 
 //using FamilyStudioFormsGui.WindowsGui.Forms;
 
@@ -335,10 +335,9 @@ namespace FamilyStudioFormsGui.WindowsGui.Forms
       string version = "1.0.0.dev";
       try
       {
-        ApplicationDeployment deply = ApplicationDeployment.CurrentDeployment;
-        version = deply.CurrentVersion.ToString();
+        version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
       }
-      catch (InvalidDeploymentException exc)
+      catch (Exception exc)
       {
         trace.TraceData(TraceEventType.Error, 0, exc.ToString());
         version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString() + "-dev";

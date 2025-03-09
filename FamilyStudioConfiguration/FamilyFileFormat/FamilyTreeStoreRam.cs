@@ -22,7 +22,7 @@ namespace FamilyStudioData.FamilyTreeStore
   [KnownType(typeof(MultimediaObjectClass))]
   [KnownType(typeof(SubmitterClass))]
 
-  public class FamilyTreeStoreRam : FamilyTreeStoreBaseClass
+  public class FamilyTreeStoreRam : IFamilyTreeStoreBaseClass
   {
     [DataMember]
     private TraceSource trace; // Add trace as datamember to avoid null-problems after reading tree from native file.

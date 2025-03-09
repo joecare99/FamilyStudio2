@@ -157,7 +157,7 @@ namespace FamilyStudioData.FamilyFileFormat
       return filterStr;
     }
 
-    /*public bool OpenWeb(String fileName, FamilyTreeStoreBaseClass inFamilyTree)
+    /*public bool OpenWeb(String fileName, IFamilyTreeStoreBaseClass inFamilyTree)
     {
       foreach (FamilyFileTypeBaseClass fileType in codecList)
       {
@@ -171,7 +171,7 @@ namespace FamilyStudioData.FamilyFileFormat
       return false;
     }*/
 
-    public FamilyTreeStoreBaseClass CreateFamilyTreeStore(String fileName, CompletedCallback callback)
+    public IFamilyTreeStoreBaseClass CreateFamilyTreeStore(String fileName, CompletedCallback callback)
     {
       if((fileName == null) || (fileName == ""))
       {
@@ -194,7 +194,7 @@ namespace FamilyStudioData.FamilyFileFormat
       return null;
     }
 
-    public bool OpenFile(String fileName, ref FamilyTreeStoreBaseClass inFamilyTree, CompletedCallback callback)
+    public bool OpenFile(String fileName, ref IFamilyTreeStoreBaseClass inFamilyTree, CompletedCallback callback)
     {
       foreach (FamilyFileTypeBaseClass fileType in codecList)
       {
@@ -256,7 +256,7 @@ namespace FamilyStudioData.FamilyFileFormat
 
     }
 
-    public void StoreFile(FamilyTreeStoreBaseClass familyTree, string filename, FamilyFileTypeOperation operation, int variant = 0)
+    public void StoreFile(IFamilyTreeStoreBaseClass familyTree, string filename, FamilyFileTypeOperation operation, int variant = 0)
     {
       trace.TraceInformation("FamilyFileEncoderCollection.StoreFile({0},{1})", filename, variant);
 

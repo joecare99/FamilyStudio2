@@ -18,7 +18,7 @@ namespace FamilyStudioFormsGui.WindowsGui.Panels.NotePanel
   class NotePanel : TreeViewPanelBaseClass
   {
     private static TraceSource trace = new TraceSource("NotePanel", SourceLevels.Warning);
-    private FamilyTreeStoreBaseClass familyTree;
+    private IFamilyTreeStoreBaseClass familyTree;
     private IndividualClass selectedIndividual;
     //private FamilyClass selectedFamily;
     private IList<Control> controlList;
@@ -61,7 +61,7 @@ namespace FamilyStudioFormsGui.WindowsGui.Panels.NotePanel
     }
 
 
-    public override void SetFamilyTree(FamilyTreeStoreBaseClass inFamilyTree)
+    public override void SetFamilyTree(IFamilyTreeStoreBaseClass inFamilyTree)
     {
       trace.TraceInformation("NotePanel::SetFamilyTree()");
 

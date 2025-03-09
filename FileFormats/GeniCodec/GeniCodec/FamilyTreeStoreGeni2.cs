@@ -12,22 +12,20 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading;
 using System.Web;
-using System.Web.Script;
-using System.Web.Script.Serialization;
 using FamilyStudioData.FamilyData;
 using FamilyStudioData.FamilyTreeStore;
 using FamilyStudioFormsGui.WindowsGui.FamilyWebBrowser;
+using System.Text.Json;
 
 namespace FamilyStudioData.FileFormats.GeniCodec
 {
   [DataContract]
-  public class FamilyTreeStoreGeni2 : FamilyTreeStoreBaseClass, IDisposable
+  public class FamilyTreeStoreGeni2 : IFamilyTreeStoreBaseClass, IDisposable
   {
     private static TraceSource trace = new TraceSource("FamilyTreeStoreGeni2", SourceLevels.Warning);
 
     private String sourceFileName;
     private FamilyWebBrowserClass authenticationWebBrowser;
-    private JavaScriptSerializer serializer;
     private const int CACHE_CLEAR_DELAY = 3600 * 24 * 7; // one week
     private FamilyTimer authenticationTimer;
     private GeniAccessStats stats;
@@ -622,8 +620,6 @@ namespace FamilyStudioData.FileFormats.GeniCodec
 
       geniTreeSize = null;
 
-      serializer = new JavaScriptSerializer();
-
       cache = new GeniCache();
 
       stats = new GeniAccessStats();
@@ -792,7 +788,7 @@ namespace FamilyStudioData.FileFormats.GeniCodec
 
       if (sLine != null)
       {
-        HttpMaxFamilyResponse maxFamilyResponse = serializer.Deserialize<HttpMaxFamilyResponse>(sLine);
+        HttpMaxFamilyResponse maxFamilyResponse = JsonSerializer.Deserialize<HttpMaxFamilyResponse>(sLine);
 
         foreach (HttpPerson person in maxFamilyResponse.results)
         {
@@ -917,7 +913,7 @@ namespace FamilyStudioData.FileFormats.GeniCodec
       string sLine = GetWebData("https://www.geni.com/api/" + familyXrefName, null, "GetFamily " + familyXrefName, 5);
       if (sLine != null)
       {
-        HttpFamilyResponse familyResponse = serializer.Deserialize<HttpFamilyResponse>(sLine);
+        HttpFamilyResponse familyResponse = JsonSerializer.Deserialize<HttpFamilyResponse>(sLine);
 
         if (familyResponse.id != null)
         {
@@ -1198,7 +1194,7 @@ namespace FamilyStudioData.FileFormats.GeniCodec
       string sLine = GetWebData("https://www.geni.com/platform/oauth/request_token?client_id=" + clientId + "&client_secret=" + clientSecret + "&grant_type=client_credentials", null, "AuthenticateApp()", 5);
       if (sLine != null)
       {
-        HttpAuthenticateResponse authenticationResponse = serializer.Deserialize<HttpAuthenticateResponse>(sLine);
+        HttpAuthenticateResponse authenticationResponse = JsonSerializer.Deserialize<HttpAuthenticateResponse>(sLine);
 
         if (authenticationResponse.access_token != null)
         {
@@ -1225,7 +1221,7 @@ namespace FamilyStudioData.FileFormats.GeniCodec
 
       if (sLine != null)
       {
-        geniTreeSize = serializer.Deserialize<HttpGeniTreeSize>(sLine);
+        geniTreeSize = JsonSerializer.Deserialize<HttpGeniTreeSize>(sLine);
 
         trace.TraceInformation("GetTreeStats() OK in " + (DateTime.Now - startTime) + "s");
       }
@@ -1552,7 +1548,7 @@ namespace FamilyStudioData.FileFormats.GeniCodec
 
         if (sLine.IndexOf("{\"focus\"") == 0)
         {
-          HttpGetIndividualResult getIndividualResult = serializer.Deserialize<HttpGetIndividualResult>(sLine);
+          HttpGetIndividualResult getIndividualResult = JsonSerializer.Deserialize<HttpGetIndividualResult>(sLine);
           if (getIndividualResult.focus != null)
           {
             if (getIndividualResult.focus.id != xrefName)
@@ -1662,7 +1658,7 @@ namespace FamilyStudioData.FileFormats.GeniCodec
         }
         else
         {
-          HttpPerson individualResult = serializer.Deserialize<HttpPerson>(sLine);
+          HttpPerson individualResult = JsonSerializer.Deserialize<HttpPerson>(sLine);
           if (individualResult != null)
           {
             cache.AddIndividual(DecodeIndividual(individualResult));
@@ -1751,7 +1747,7 @@ namespace FamilyStudioData.FileFormats.GeniCodec
           int handledResults = 0;
           do
           {
-            HttpSearchPersonResult searchPersonResult = serializer.Deserialize<HttpSearchPersonResult>(sLine);
+            HttpSearchPersonResult searchPersonResult = JsonSerializer.Deserialize<HttpSearchPersonResult>(sLine);
 
             if (searchPersonResult != null)
             {
@@ -1768,7 +1764,7 @@ namespace FamilyStudioData.FileFormats.GeniCodec
               }
               else
               {
-                HttpPerson onePerson = serializer.Deserialize<HttpPerson>(sLine);
+                HttpPerson onePerson = JsonSerializer.Deserialize<HttpPerson>(sLine);
                 trace.TraceData(TraceEventType.Information, 0, "SearchPerson():add from web one single person " + onePerson);
                 yield return DecodeIndividual(onePerson);
               }

@@ -31,17 +31,17 @@ namespace FamilyStudioData.FileFormats.GeniCodec
       return false;
     }
 
-    public override FamilyTreeStoreBaseClass CreateFamilyTreeStore(String fileName, CompletedCallback callback)
+    public override IFamilyTreeStoreBaseClass CreateFamilyTreeStore(String fileName, CompletedCallback callback)
     {
       FamilyTreeStoreGeni2 GeniStore = new FamilyTreeStoreGeni2(callback);
 
       trace.TraceInformation("GeniFileType::CreateFamilyTreeStore( " + fileName + ")");
 
       GeniStore.SetFile(fileName);
-      return (FamilyTreeStoreBaseClass)GeniStore;
+      return (IFamilyTreeStoreBaseClass)GeniStore;
     }
 
-    public override bool OpenFile(String fileName, ref FamilyTreeStoreBaseClass inFamilyTree, CompletedCallback callback)
+    public override bool OpenFile(String fileName, ref IFamilyTreeStoreBaseClass inFamilyTree, CompletedCallback callback)
     {
       FamilyTreeStoreGeni2 GeniStore = (FamilyTreeStoreGeni2)inFamilyTree;
 

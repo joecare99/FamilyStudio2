@@ -30,7 +30,7 @@ namespace FamilyStudioData.FileFormats.XmlCodec
     }
 
 
-    public void StoreFile(FamilyTreeStoreBaseClass familyTree, string filename, FamilyFileTypeOperation operation, int variant = 0)
+    public void StoreFile(IFamilyTreeStoreBaseClass familyTree, string filename, FamilyFileTypeOperation operation, int variant = 0)
     {
       trace.TraceInformation("XmlEncoder::StoreFile() start " + DateTime.Now);
 

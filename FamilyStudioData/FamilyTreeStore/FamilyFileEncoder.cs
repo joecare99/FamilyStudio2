@@ -11,7 +11,7 @@ namespace FamilyStudioData.FamilyTreeStore
 {
   public interface FamilyFileEncoder
   {
-    void StoreFile(FamilyTreeStoreBaseClass familyTree, string filename, FamilyFileTypeOperation operation, int variant = 0);
+    void StoreFile(IFamilyTreeStoreBaseClass familyTree, string filename, FamilyFileTypeOperation operation, int variant = 0);
 
     void SetProgressTarget(ProgressReporterInterface progressTarget);
 

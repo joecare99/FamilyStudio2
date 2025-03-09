@@ -4,19 +4,18 @@ using System.Linq;
 using System.Windows.Forms;
 using FamilyStudioFormsGui.WindowsGui.Forms;
 
-namespace FamilyStudio1
+namespace FamilyStudio1;
+
+static class Program
 {
-    static class Program
+    /// <summary>
+    /// The main entry point for the application.
+    /// </summary>
+    [STAThread]
+    static void Main()
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
-        [STAThread]
-        static void Main()
-        {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MDIFamilyParent());
-        }
+        Application.EnableVisualStyles();
+        Application.SetCompatibleTextRenderingDefault(false);
+        Application.Run(new MDIFamilyParent());
     }
 }

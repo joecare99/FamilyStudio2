@@ -26,8 +26,8 @@ namespace FamilyStudioFormsGui.WindowsGui.Forms
     private String individual2;
     private FamilyUtility utility;
     private CompareTreeWorker compareWorker;
-    private FamilyTreeStoreBaseClass familyTree1;
-    private FamilyTreeStoreBaseClass familyTree2;
+    private IFamilyTreeStoreBaseClass familyTree1;
+    private IFamilyTreeStoreBaseClass familyTree2;
 
     public TreeCompareForm(IList<Form> mdiChildren, MDIFamilyParent parent)
     {
@@ -160,7 +160,7 @@ namespace FamilyStudioFormsGui.WindowsGui.Forms
       fileDlg.InitialDirectory = utility.GetCurrentDirectory();
       fileDlg.Filter = "Compare List|*.fsc";
 
-      if (fileDlg.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+      if (fileDlg.ShowDialog(this) == DialogResult.OK)
       {
         DataContractSerializer serializer = new DataContractSerializer(typeof(SavedMatches));
 
@@ -215,7 +215,7 @@ namespace FamilyStudioFormsGui.WindowsGui.Forms
       fileDlg.Filter = "Compare List|*.fsc";
       fileDlg.InitialDirectory = utility.GetCurrentDirectory();
 
-      if (fileDlg.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+      if (fileDlg.ShowDialog(this) == DialogResult.OK)
       {
         FileStream saveList = new FileStream(fileDlg.FileName, FileMode.Create);
 
@@ -315,15 +315,15 @@ namespace FamilyStudioFormsGui.WindowsGui.Forms
       }
       fileDlg.InitialDirectory = utility.GetCurrentDirectory();
 
-      if (fileDlg.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+      if (fileDlg.ShowDialog(this) == DialogResult.OK)
       {
         //FileStream saveList = new FileStream(fileDlg.FileName, FileMode.Create);
         StreamWriter exportFile = new StreamWriter(fileDlg.FileName);
 
         bool found1 = false;
         bool found2 = false;
-        FamilyTreeStoreBaseClass familyTree1 = null;
-        FamilyTreeStoreBaseClass familyTree2 = null;
+        IFamilyTreeStoreBaseClass familyTree1 = null;
+        IFamilyTreeStoreBaseClass familyTree2 = null;
 
         SavedMatches matches = new SavedMatches();
         matches.database1 = selectedForm1.Text;
@@ -506,8 +506,8 @@ namespace FamilyStudioFormsGui.WindowsGui.Forms
       string name1 = listBox1.Items[listBox1.SelectedIndex].ToString();
       string name2 = listBox2.Items[listBox2.SelectedIndex].ToString();
 
-      FamilyTreeStoreBaseClass familyTree1 = null;
-      FamilyTreeStoreBaseClass familyTree2 = null;
+      IFamilyTreeStoreBaseClass familyTree1 = null;
+      IFamilyTreeStoreBaseClass familyTree2 = null;
 
       foreach (FamilyForm2 form in formList)
       {
@@ -550,16 +550,16 @@ namespace FamilyStudioFormsGui.WindowsGui.Forms
 
       private class WorkerInterface
       {
-        public FamilyTreeStoreBaseClass familyTree1;
-        public FamilyTreeStoreBaseClass familyTree2;
+        public IFamilyTreeStoreBaseClass familyTree1;
+        public IFamilyTreeStoreBaseClass familyTree2;
       }
 
       public CompareTreeWorker(
         object sender,
         SavedMatches matches,
         AsyncWorkerProgress progress,
-        FamilyTreeStoreBaseClass familyTree1,
-        FamilyTreeStoreBaseClass familyTree2,
+        IFamilyTreeStoreBaseClass familyTree1,
+        IFamilyTreeStoreBaseClass familyTree2,
         ReportCompareResult resultReporter)
       {
         trace = new TraceSource("CompareTreeWorker", SourceLevels.All);
@@ -608,7 +608,7 @@ namespace FamilyStudioFormsGui.WindowsGui.Forms
         return person.GetName() + ",b:" + person.GetDate(IndividualEventClass.EventType.Birth).ToString() + ",d:" + person.GetDate(IndividualEventClass.EventType.Death).ToString() + ",f:" + str;
       }
 
-      ListViewItem CreateListItem(FamilyTreeStoreBaseClass familyTree1, IndividualClass person1, FamilyTreeStoreBaseClass familyTree2, IndividualClass person2)
+      ListViewItem CreateListItem(IFamilyTreeStoreBaseClass familyTree1, IndividualClass person1, IFamilyTreeStoreBaseClass familyTree2, IndividualClass person2)
       {
         ListViewItem item = new ListViewItem(person1.GetName());
         FamilyStatusClass.IndividualStatus status1 = FamilyStatusClass.CheckCorrectness(familyTree1, person1);
@@ -692,7 +692,7 @@ namespace FamilyStudioFormsGui.WindowsGui.Forms
         return "No " + s;
       }
 
-      private void ReportMatchingProfiles(FamilyTreeStoreBaseClass familyTree1, string person1, FamilyTreeStoreBaseClass familyTree2, string person2)
+      private void ReportMatchingProfiles(IFamilyTreeStoreBaseClass familyTree1, string person1, IFamilyTreeStoreBaseClass familyTree2, string person2)
       {
         IndividualClass person1full = familyTree1.GetIndividual(person1);
         IndividualClass person2full = familyTree2.GetIndividual(person2);
@@ -701,7 +701,7 @@ namespace FamilyStudioFormsGui.WindowsGui.Forms
       }
 
 
-      private void DoCompare(FamilyTreeStoreBaseClass familyTree1, FamilyTreeStoreBaseClass familyTree2, AsyncWorkerProgress reporter)
+      private void DoCompare(IFamilyTreeStoreBaseClass familyTree1, IFamilyTreeStoreBaseClass familyTree2, AsyncWorkerProgress reporter)
       {
 
         CompareTreeClass.CompareTrees(familyTree1, familyTree2, ReportMatchingProfiles, reporter);

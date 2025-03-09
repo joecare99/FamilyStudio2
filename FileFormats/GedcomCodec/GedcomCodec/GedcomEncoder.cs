@@ -61,7 +61,7 @@ namespace FamilyStudioData.FileFormats.GedcomCodec
     }
     class GedcomMappers
     {
-      private FamilyTreeStoreBaseClass familyTree;
+      private IFamilyTreeStoreBaseClass familyTree;
       private IDictionary<string, XrefMapperClass> individualXrefMapper;
       private IDictionary<string, XrefMapperClass> familyXrefMapper;
       private IDictionary<string, XrefMapperClass> multimediaXrefMapper;
@@ -71,7 +71,7 @@ namespace FamilyStudioData.FileFormats.GedcomCodec
       private IDictionary<string, XrefMapperClass> submissionXrefMapper;
       private IDictionary<string, XrefMapperClass> submitterXrefMapper;
 
-      public GedcomMappers(FamilyTreeStoreBaseClass familyTree)
+      public GedcomMappers(IFamilyTreeStoreBaseClass familyTree)
       {
         this.familyTree = familyTree;
         individualXrefMapper = new Dictionary<string, XrefMapperClass>();
@@ -985,7 +985,7 @@ namespace FamilyStudioData.FileFormats.GedcomCodec
   }
 
 
-    private void WriteFamily(FileStream file, FamilyClass family, FamilyTreeStoreBaseClass familyTree, bool includeReferences = true)
+    private void WriteFamily(FileStream file, FamilyClass family, IFamilyTreeStoreBaseClass familyTree, bool includeReferences = true)
     {
       WriteData(file, "0 @" + family.GetXrefName() + "@ FAM" + Linefeed());
       if (family.GetXrefName().Length == 0)
@@ -1321,7 +1321,7 @@ namespace FamilyStudioData.FileFormats.GedcomCodec
     }
 
 
-    public void StoreFile(FamilyTreeStoreBaseClass familyTree, string filename, FamilyFileTypeOperation operation, int variant = 0)
+    public void StoreFile(IFamilyTreeStoreBaseClass familyTree, string filename, FamilyFileTypeOperation operation, int variant = 0)
     {
       //FamilyForm2 parentObj = null;
 

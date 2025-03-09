@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup />
+  <ItemGroup>
+    <Compile Update="WindowsGui\Controls\FamilyPanel2.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="WindowsGui\Controls\FamilyPanel_remove.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="WindowsGui\Controls\IndividualControl4.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="WindowsGui\Forms\AddPersonForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="WindowsGui\Forms\FamilyForm2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="WindowsGui\Forms\FamilySearchForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="WindowsGui\Forms\FlagsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="WindowsGui\Forms\IndividualForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="WindowsGui\Forms\MDIFamilyParent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="WindowsGui\Forms\TreeCompareForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="WindowsGui\Panels\AsyncTreePanel1\AsyncTreeButtons.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="WindowsGui\Panels\AsyncTreePanel1\AsyncTreePanel1.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="WindowsGui\Panels\ComparePanel1\ComparePanel1.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="WindowsGui\Panels\ComplenessViewPanel1\CompletenessViewPanel1.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="WindowsGui\Panels\ComplenessViewPanel1\RelationFinderPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="WindowsGui\Panels\ComplenessViewPanel1\SanitySettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="WindowsGui\Panels\ImageViewPanels\ImageViewPanel1.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="WindowsGui\Panels\NotePanel\NotePanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="WindowsGui\Panels\PersonViewPanel1\PersonViewPanel1.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="WindowsGui\Panels\SearchPanel\SearchPanel1.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="WindowsGui\Panels\TreeViewPanel1\IndividualControl3.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="WindowsGui\Panels\TreeViewPanel1\TreeViewPanel1.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="WindowsGui\Panels\TreeViewPanel2\TreeViewPanel2.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="WindowsGui\Panels\TreeViewPanel4\TreeViewPanel4.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="WindowsGui\Panels\TreeViewPanel5\TreeViewPanel5.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="WindowsGui\Panels\TreeViewPanelBaseClass.cs">
+      <SubType>Component</SubType>
+    </Compile>
+  </ItemGroup>
+</Project>

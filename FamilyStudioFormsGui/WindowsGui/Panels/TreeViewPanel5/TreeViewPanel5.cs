@@ -53,7 +53,7 @@ namespace FamilyStudioFormsGui.WindowsGui.Panels.TreeViewPanel5
       //details.ToolTipTitle = individual.GetName();
       //details.ToolTipIcon = ToolTipIcon.Info;
 
-      AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+      AutoSizeMode = AutoSizeMode.GrowAndShrink;
       AutoSize = false;
       Height = size.Y;
       Width = size.X;
@@ -177,7 +177,7 @@ namespace FamilyStudioFormsGui.WindowsGui.Panels.TreeViewPanel5
   class TreeViewPanel5 : TreeViewPanelBaseClass
   {
     private static TraceSource trace = new TraceSource("TreeViewPanel5", SourceLevels.Warning);
-    private FamilyTreeStoreBaseClass familyTree;
+    private IFamilyTreeStoreBaseClass familyTree;
     private IndividualClass selectedIndividual;
     //private FamilyClass selectedFamily;
     private IList<IndividualButton> controlList;
@@ -282,7 +282,7 @@ namespace FamilyStudioFormsGui.WindowsGui.Panels.TreeViewPanel5
 
 
 
-    public override void SetFamilyTree(FamilyTreeStoreBaseClass inFamilyTree)
+    public override void SetFamilyTree(IFamilyTreeStoreBaseClass inFamilyTree)
     {
       trace.TraceInformation("TreeViewPanel5::SetFamilyTree()");
 

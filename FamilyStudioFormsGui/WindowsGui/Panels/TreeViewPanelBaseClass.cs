@@ -16,7 +16,7 @@ namespace FamilyStudioFormsGui.WindowsGui.Panels
 {
   abstract class TreeViewPanelBaseClass : Panel
   {
-    public abstract void SetFamilyTree(FamilyTreeStoreBaseClass inFamilyTree);
+    public abstract void SetFamilyTree(IFamilyTreeStoreBaseClass inFamilyTree);
     //public abstract void SetSelectedIndividual(String xrefName);
     public abstract void SetParentForm(FamilyForm2 parentForm);
     public abstract string GetTitle();
