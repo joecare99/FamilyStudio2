@@ -18,7 +18,7 @@ namespace FamilyStudioFormsGui.WindowsGui.Panels
   class ImageViewPanel1 : TreeViewPanelBaseClass //, FlowLayoutPanel
   {
     private static TraceSource trace = new TraceSource("ImageViewPanel", SourceLevels.Warning);
-    private FamilyTreeStoreBaseClass familyTree;
+    private IFamilyTreeStoreBaseClass familyTree;
     private IndividualClass selectedIndividual;
     private IList<Control> controlList;
     private bool layoutDone;
@@ -98,7 +98,7 @@ namespace FamilyStudioFormsGui.WindowsGui.Panels
     }
 
 
-    public override void SetFamilyTree(FamilyTreeStoreBaseClass inFamilyTree)
+    public override void SetFamilyTree(IFamilyTreeStoreBaseClass inFamilyTree)
     {
       trace.TraceInformation("ImageViewPanel1::SetFamilyTree()");
 

@@ -23,9 +23,9 @@ namespace FamilyStudioData.FamilyTreeStore
   {
     bool IsKnownFileType(String fileName);
 
-    FamilyTreeStoreBaseClass CreateFamilyTreeStore(String fileName, CompletedCallback callback);
+    IFamilyTreeStoreBaseClass CreateFamilyTreeStore(String fileName, CompletedCallback callback);
 
-    bool OpenFile(String fileName, ref FamilyTreeStoreBaseClass inFamilyTree, CompletedCallback callback);
+    bool OpenFile(String fileName, ref IFamilyTreeStoreBaseClass inFamilyTree, CompletedCallback callback);
 
     bool SetProgressTarget(BackgroundWorker inBackgroundWorker);
 
@@ -36,9 +36,9 @@ namespace FamilyStudioData.FamilyTreeStore
   {
     public abstract bool IsKnownFileType(String fileName);
 
-    public abstract FamilyTreeStoreBaseClass CreateFamilyTreeStore(String fileName, CompletedCallback callback);
+    public abstract IFamilyTreeStoreBaseClass CreateFamilyTreeStore(String fileName, CompletedCallback callback);
 
-    public abstract bool OpenFile(String fileName, ref FamilyTreeStoreBaseClass inFamilyTree, CompletedCallback callback);
+    public abstract bool OpenFile(String fileName, ref IFamilyTreeStoreBaseClass inFamilyTree, CompletedCallback callback);
 
     public abstract bool SetProgressTarget(BackgroundWorker inBackgroundWorker);
 

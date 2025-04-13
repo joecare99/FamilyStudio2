@@ -26,11 +26,12 @@ namespace FamilyStudioData.FamilyData
       Country,
 
       PhoneNumber,
-      //EmailAddress,
-      //WebAddress,
+            Line3,
+            //EmailAddress,
+            //WebAddress,
 
-      //Note
-    }
+            //Note
+        }
     [DataMember]
     private AddressPartType type;
     [DataMember]

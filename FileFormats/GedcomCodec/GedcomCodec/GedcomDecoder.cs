@@ -17,7 +17,7 @@ namespace FamilyStudioData.FileFormats.GedcomCodec
   public class GedcomDecoder : FamilyFileTypeBaseClass
   {
     private static TraceSource trace = new TraceSource("GedcomDecoder", SourceLevels.Warning);
-    private FamilyTreeStoreBaseClass familyTree;
+    private IFamilyTreeStoreBaseClass familyTree;
     private BackgroundWorker backgroundWorker;
     private int parsedLines;
     private bool printMemory;
@@ -47,7 +47,7 @@ namespace FamilyStudioData.FileFormats.GedcomCodec
     }
 
 
-    private bool ReadFile(String fileName, ref FamilyTreeStoreBaseClass inFamilyTree)
+    private bool ReadFile(String fileName, ref IFamilyTreeStoreBaseClass inFamilyTree)
     {
       printMemory = false;// true;
 
@@ -401,14 +401,14 @@ namespace FamilyStudioData.FileFormats.GedcomCodec
       return false;
     }
 
-    public override FamilyTreeStoreBaseClass CreateFamilyTreeStore(String fileName, CompletedCallback callback)
+    public override IFamilyTreeStoreBaseClass CreateFamilyTreeStore(String fileName, CompletedCallback callback)
     {
       trace.TraceInformation("GedcomDecoder::CreateFamilyTreeStore( " + fileName + ")");
       callback(true);
       return null;
     }
 
-    public override bool OpenFile(String fileName, ref FamilyTreeStoreBaseClass inFamilyTree, CompletedCallback callback)
+    public override bool OpenFile(String fileName, ref IFamilyTreeStoreBaseClass inFamilyTree, CompletedCallback callback)
     {
       trace.TraceInformation("GedcomDecoder::OpenFile( " + fileName + ")");
       bool result = ReadFile(fileName, ref inFamilyTree);

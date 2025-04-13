@@ -63,18 +63,22 @@ namespace FamilyStudioFormsGui.WindowsGui.Panels.TreeViewPanel2
 
     void IndividualButton_MouseUp(object sender, MouseEventArgs e)
     {
-      if (e.Button == System.Windows.Forms.MouseButtons.Right)
+      if (e.Button == MouseButtons.Right)
       {
-        ContextMenu menu = new ContextMenu();
+        // TODO ContextMenuStrip wird nicht mehr unterstützt. Verwenden Sie stattdessen ContextMenuStrip. Weitere Informationen finden Sie unter: https://docs.microsoft.com/en-us/dotnet/core/compatibility/winforms#removed-controls
+        ContextMenuStrip menu = new ContextMenuStrip();
 
-        menu.MenuItems.Add(new MenuItem("Add parent", AddParent_Click));
-        menu.MenuItems.Add(new MenuItem("Add child", AddChild_Click));
+        // TODO ToolStripMenuItem wird nicht mehr unterstützt. Verwenden Sie stattdessen ToolStripMenuItem. Weitere Informationen finden Sie unter: https://docs.microsoft.com/en-us/dotnet/core/compatibility/winforms#removed-controls
+        menu.Items.Add(new ToolStripMenuItem("Add parent", null, AddParent_Click));
+        // TODO ToolStripMenuItem wird nicht mehr unterstützt. Verwenden Sie stattdessen ToolStripMenuItem. Weitere Informationen finden Sie unter: https://docs.microsoft.com/en-us/dotnet/core/compatibility/winforms#removed-controls
+        menu.Items.Add(new ToolStripMenuItem("Add child", null, AddChild_Click));
         IList<string> urlList = individual.GetUrlList();
         if (urlList != null)
         {
           foreach (string url in urlList)
           {
-            menu.MenuItems.Add(new MenuItem(url, Url_Click));
+            // TODO ToolStripMenuItem wird nicht mehr unterstützt. Verwenden Sie stattdessen ToolStripMenuItem. Weitere Informationen finden Sie unter: https://docs.microsoft.com/en-us/dotnet/core/compatibility/winforms#removed-controls
+            menu.Items.Add(new ToolStripMenuItem(url, null, Url_Click));
           }
         }
         menu.Show(this, new Point(0, 0));
@@ -91,9 +95,10 @@ namespace FamilyStudioFormsGui.WindowsGui.Panels.TreeViewPanel2
     }
     void Url_Click(object sender, EventArgs e)
     {
-      if (sender.GetType() == typeof(MenuItem))
+      // TODO ToolStripMenuItem wird nicht mehr unterstützt. Verwenden Sie stattdessen ToolStripMenuItem. Weitere Informationen finden Sie unter: https://docs.microsoft.com/en-us/dotnet/core/compatibility/winforms#removed-controls
+      if (sender.GetType() == typeof(ToolStripMenuItem))
       {
-        MenuItem clickedItem = (MenuItem)sender;
+        ToolStripMenuItem clickedItem = (ToolStripMenuItem)sender;
         //parent.AddRelative(AsyncTreePanel1.RelativeType.Child);
         Process.Start(clickedItem.Text);
       }
@@ -208,7 +213,7 @@ namespace FamilyStudioFormsGui.WindowsGui.Panels.TreeViewPanel2
   class TreeViewPanel2 : TreeViewPanelBaseClass
   {
     private static TraceSource trace = new TraceSource("TreeViewPanel2", SourceLevels.Warning);
-    private FamilyTreeStoreBaseClass familyTree;
+    private IFamilyTreeStoreBaseClass familyTree;
     private IndividualClass selectedIndividual;
     private IndividualClass pastedIndividual;
     //private FamilyClass selectedFamily;
@@ -250,12 +255,15 @@ namespace FamilyStudioFormsGui.WindowsGui.Panels.TreeViewPanel2
       if ((clipboard != null) && (clipboard.GetType() == typeof(IndividualClass)))
       {
         pastedIndividual = (IndividualClass) clipboard;
-        ContextMenu menu = new ContextMenu();
+        // TODO ContextMenuStrip wird nicht mehr unterstützt. Verwenden Sie stattdessen ContextMenuStrip. Weitere Informationen finden Sie unter: https://docs.microsoft.com/en-us/dotnet/core/compatibility/winforms#removed-controls
+        ContextMenuStrip menu = new ContextMenuStrip();
 
         if (selectedIndividual != null)
         {
-          menu.MenuItems.Add(new MenuItem("Paste as parent", PasteAsParent_Click));
-          menu.MenuItems.Add(new MenuItem("Paste as child", PasteAsChild_Click));
+          // TODO ToolStripMenuItem wird nicht mehr unterstützt. Verwenden Sie stattdessen ToolStripMenuItem. Weitere Informationen finden Sie unter: https://docs.microsoft.com/en-us/dotnet/core/compatibility/winforms#removed-controls
+          menu.Items.Add(new ToolStripMenuItem("Paste as parent", null, PasteAsParent_Click));
+          // TODO ToolStripMenuItem wird nicht mehr unterstützt. Verwenden Sie stattdessen ToolStripMenuItem. Weitere Informationen finden Sie unter: https://docs.microsoft.com/en-us/dotnet/core/compatibility/winforms#removed-controls
+          menu.Items.Add(new ToolStripMenuItem("Paste as child", null, PasteAsChild_Click));
           menu.Show(this, new Point(0, 0));
         }
       }
@@ -263,16 +271,16 @@ namespace FamilyStudioFormsGui.WindowsGui.Panels.TreeViewPanel2
 
     void PasteAsParent_Click(object sender, EventArgs e)
     {
-      AddRelative(TreeViewPanel2.RelativeType.Parent, pastedIndividual);
+      AddRelative(RelativeType.Parent, pastedIndividual);
       pastedIndividual = null;
     }
     void PasteAsChild_Click(object sender, EventArgs e)
     {
-      AddRelative(TreeViewPanel2.RelativeType.Child, pastedIndividual);
+      AddRelative(RelativeType.Child, pastedIndividual);
       pastedIndividual = null;
     }
 
-    public override void SetFamilyTree(FamilyTreeStoreBaseClass inFamilyTree)
+    public override void SetFamilyTree(IFamilyTreeStoreBaseClass inFamilyTree)
     {
       trace.TraceInformation("TreeViewPanel2::SetFamilyTree()");
 

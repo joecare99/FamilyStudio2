@@ -50,7 +50,7 @@ namespace FamilyStudioData.FileFormats.AnarkivCodec
 
     class AnarkivMappers
     {
-      private FamilyTreeStoreBaseClass familyTree;
+      private IFamilyTreeStoreBaseClass familyTree;
       private IDictionary<string, XrefMapperClass> individualXrefMapper;
       private IDictionary<string, XrefMapperClass> familyXrefMapper;
       private IDictionary<string, XrefMapperClass> multimediaXrefMapper;
@@ -60,7 +60,7 @@ namespace FamilyStudioData.FileFormats.AnarkivCodec
       private IDictionary<string, XrefMapperClass> submissionXrefMapper;
       private IDictionary<string, XrefMapperClass> submitterXrefMapper;
 
-      public AnarkivMappers(FamilyTreeStoreBaseClass familyTree)
+      public AnarkivMappers(IFamilyTreeStoreBaseClass familyTree)
       {
         this.familyTree = familyTree;
         individualXrefMapper = new Dictionary<string, XrefMapperClass>();
@@ -173,7 +173,7 @@ namespace FamilyStudioData.FileFormats.AnarkivCodec
       return false;
     }
 
-    public override FamilyTreeStoreBaseClass CreateFamilyTreeStore(String fileName, CompletedCallback callback)
+    public override IFamilyTreeStoreBaseClass CreateFamilyTreeStore(String fileName, CompletedCallback callback)
     {
       FamilyTreeStoreAnarkiv anarkivStore = new FamilyTreeStoreAnarkiv();
 
@@ -181,10 +181,10 @@ namespace FamilyStudioData.FileFormats.AnarkivCodec
 
       anarkivStore.SetFile(fileName);
       callback(true);
-      return (FamilyTreeStoreBaseClass)anarkivStore;
+      return (IFamilyTreeStoreBaseClass)anarkivStore;
     }
 
-    private void ReadFile(ref FamilyTreeStoreBaseClass inFamilyTree, FamilyTreeStoreAnarkiv anarkivStore)
+    private void ReadFile(ref IFamilyTreeStoreBaseClass inFamilyTree, FamilyTreeStoreAnarkiv anarkivStore)
     {
       //IndividualClass person = anarkivStore.GetIndividual();
 
@@ -274,7 +274,7 @@ namespace FamilyStudioData.FileFormats.AnarkivCodec
 
     }
 
-    public override bool OpenFile(String fileName, ref FamilyTreeStoreBaseClass inFamilyTree, CompletedCallback callback)
+    public override bool OpenFile(String fileName, ref IFamilyTreeStoreBaseClass inFamilyTree, CompletedCallback callback)
     {
       FamilyTreeStoreAnarkiv anarkivStore;
 

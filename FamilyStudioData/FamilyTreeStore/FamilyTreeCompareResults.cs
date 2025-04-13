@@ -41,7 +41,7 @@ namespace FamilyStudioData.FamilyTreeStore
     }
   }
 
-  public delegate void ReportCompareResult(FamilyTreeStoreBaseClass familyTree1, string person1, FamilyTreeStoreBaseClass familyTree2, string person2);
+  public delegate void ReportCompareResult(IFamilyTreeStoreBaseClass familyTree1, string person1, IFamilyTreeStoreBaseClass familyTree2, string person2);
 
   public class CompareTreeClass
   {
@@ -160,7 +160,7 @@ namespace FamilyStudioData.FamilyTreeStore
       return false;
     }
 
-    public static void SearchDuplicates(IndividualClass person1, FamilyTreeStoreBaseClass familyTree1, FamilyTreeStoreBaseClass familyTree2, ReportCompareResult reportDuplicate, ProgressReporterInterface reporter = null)
+    public static void SearchDuplicates(IndividualClass person1, IFamilyTreeStoreBaseClass familyTree1, IFamilyTreeStoreBaseClass familyTree2, ReportCompareResult reportDuplicate, ProgressReporterInterface reporter = null)
     {
       IndividualEventClass birth = person1.GetEvent(IndividualEventClass.EventType.Birth);
       IndividualEventClass death = person1.GetEvent(IndividualEventClass.EventType.Death);
@@ -279,7 +279,7 @@ namespace FamilyStudioData.FamilyTreeStore
       }
     }
 
-    public static void CompareTrees(FamilyTreeStoreBaseClass familyTree1, FamilyTreeStoreBaseClass familyTree2, ReportCompareResult reportDuplicate, ProgressReporterInterface reporter = null)
+    public static void CompareTrees(IFamilyTreeStoreBaseClass familyTree1, IFamilyTreeStoreBaseClass familyTree2, ReportCompareResult reportDuplicate, ProgressReporterInterface reporter = null)
     {
       IEnumerator<IndividualClass> iterator1;
       int cnt1 = 0;

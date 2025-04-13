@@ -13,15 +13,17 @@ using System.ComponentModel;
 using FamilyStudioData.FamilyData;
 using FamilyStudioData.FamilyTreeStore;
 //using FamilyStudioData.FamilyFileFormat;
-using System.Web.Script.Serialization;
+//using System.Web.Script.Serialization;
 //using System.Web.Script.Serialization.JavaScriptConverter;
 //using System.Collections.ObjectModel;
 //using System.Web.UI.WebControls;
 using FamilyStudioFormsGui.WindowsGui.FamilyWebBrowser;
+using System.Net.Http;
+using System.Text.Json;
 
 namespace FamilyStudioData.FileFormats.MyHeritageCodec
 {
-  public class FamilyTreeStoreMyHeritage : FamilyTreeStoreBaseClass, IDisposable
+  public class FamilyTreeStoreMyHeritage : IFamilyTreeStoreBaseClass, IDisposable
   {
     private static TraceSource trace = new TraceSource("FamilyTreeStoreMyHeritage", SourceLevels.Warning);
     private Boolean printDecode;
@@ -34,7 +36,7 @@ namespace FamilyStudioData.FileFormats.MyHeritageCodec
     private String sourceFileName;
     private bool authenticated;
     private FamilyWebBrowserClass authenticationWebBrowser;
-    private JavaScriptSerializer serializer;
+//    private JavaScriptSerializer serializer;
     private string rootPersonXref;
 
     protected virtual void Dispose(bool managed)
@@ -243,8 +245,6 @@ namespace FamilyStudioData.FileFormats.MyHeritageCodec
       authenticationWebBrowser = null;
       geniTreeSize = null;
 
-      serializer = new JavaScriptSerializer();
-
      //Authenticate();
 
       //FamilyTreeStoreGeni2 geni2 = new FamilyTreeStoreGeni2();
@@ -314,7 +314,7 @@ namespace FamilyStudioData.FileFormats.MyHeritageCodec
           return null;
         }
 
-        maxFamilyResponse = serializer.Deserialize<HttpMaxFamilyResponse>(sLine);
+        maxFamilyResponse = JsonSerializer.Deserialize<HttpMaxFamilyResponse>(sLine);
 
         foreach(HttpPerson person in maxFamilyResponse.results)
         {
@@ -385,8 +385,8 @@ namespace FamilyStudioData.FileFormats.MyHeritageCodec
       {
         string sURL = "https://www.geni.com/api/union-" + familyXrefName;
 
-        WebRequest wrGETURL;
-        wrGETURL = WebRequest.Create(sURL);
+        
+        var wrGETURL = new HttpClient().GetAsync(sURL).GetAwaiter().GetResult();
         if (authenticationToken != null)
         {
           wrGETURL.Headers.Add("Authorization", String.Format("Bearer {0}", Uri.EscapeDataString(authenticationToken)));
@@ -396,7 +396,7 @@ namespace FamilyStudioData.FileFormats.MyHeritageCodec
           trace.TraceInformation("GetFamily() url " + sURL);
         }
 
-        Stream objStream = wrGETURL.GetResponse().GetResponseStream();
+        Stream objStream = wrGETURL.Content.ReadAsStream();
 
         StreamReader objReader = new StreamReader(objStream);
 
@@ -423,7 +423,7 @@ namespace FamilyStudioData.FileFormats.MyHeritageCodec
           return null;
         }
 
-        familyResponse = serializer.Deserialize<HttpFamilyResponse>(sLine);
+        familyResponse = JsonSerializer.Deserialize<HttpFamilyResponse>(sLine);
 
         if (familyResponse.id != null)
         {
@@ -648,7 +648,7 @@ namespace FamilyStudioData.FileFormats.MyHeritageCodec
           return;
         }
 
-        authenticationResponse = serializer.Deserialize<HttpAuthenticateResponse>(sLine);
+        authenticationResponse = JsonSerializer.Deserialize<HttpAuthenticateResponse>(sLine);
 
         if (authenticationResponse.access_token != null)
         {
@@ -716,7 +716,7 @@ namespace FamilyStudioData.FileFormats.MyHeritageCodec
           return;
         }
 
-        geniTreeSize = serializer.Deserialize<HttpGeniTreeSize>(sLine);
+        geniTreeSize = JsonSerializer.Deserialize<HttpGeniTreeSize>(sLine);
 
         if (printDecode)
         {
@@ -903,7 +903,7 @@ namespace FamilyStudioData.FileFormats.MyHeritageCodec
           return null;
         }
 
-        getIndividualResult = serializer.Deserialize<HttpGetIndividualResult>(sLine);
+        getIndividualResult = JsonSerializer.Deserialize<HttpGetIndividualResult>(sLine);
 
         if (getIndividualResult.focus != null)
         {
@@ -1040,7 +1040,7 @@ namespace FamilyStudioData.FileFormats.MyHeritageCodec
 
         if (sLine != null)
         {
-          searchPersonResult = serializer.Deserialize<HttpSearchPersonResult>(sLine);
+          searchPersonResult = JsonSerializer.Deserialize<HttpSearchPersonResult>(sLine);
 
           foreach (HttpSearchPerson person in searchPersonResult.results)
           {

@@ -21,7 +21,7 @@ namespace FamilyStudioFormsGui.WindowsGui.Panels.RelationFinderPanel
   class RelationFinderPanel : TreeViewPanelBaseClass
   {
     private static TraceSource trace = new TraceSource("RelationFinderPanel", SourceLevels.Warning);
-    private FamilyTreeStoreBaseClass familyTree;
+    private IFamilyTreeStoreBaseClass familyTree;
     private IndividualClass selectedIndividual;
     //private FamilyClass selectedFamily;
     private IList<Control> controlList;
@@ -207,7 +207,7 @@ namespace FamilyStudioFormsGui.WindowsGui.Panels.RelationFinderPanel
       fileDlg.InitialDirectory = utility.GetCurrentDirectory();
       fileDlg.Filter = "Stats List|*.fsrel";
 
-      if (fileDlg.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+      if (fileDlg.ShowDialog(this) == DialogResult.OK)
       {
         DataContractSerializer serializer = new DataContractSerializer(typeof(RelationStackList));
 
@@ -241,7 +241,7 @@ namespace FamilyStudioFormsGui.WindowsGui.Panels.RelationFinderPanel
       fileDlg.Filter = "Relation List|*.fsrel";
       fileDlg.InitialDirectory = utility.GetCurrentDirectory();
 
-      if (fileDlg.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+      if (fileDlg.ShowDialog(this) == DialogResult.OK)
       {
         SaveListToFile(fileDlg.FileName, relationList);
       }
@@ -261,7 +261,7 @@ namespace FamilyStudioFormsGui.WindowsGui.Panels.RelationFinderPanel
       }
       fileDlg.InitialDirectory = utility.GetCurrentDirectory();
 
-      if (fileDlg.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+      if (fileDlg.ShowDialog(this) == DialogResult.OK)
       {
         ExportListToFile(fileDlg.FileName, relationList, html);
       }
@@ -434,7 +434,7 @@ namespace FamilyStudioFormsGui.WindowsGui.Panels.RelationFinderPanel
 
 
 
-    public override void SetFamilyTree(FamilyTreeStoreBaseClass inFamilyTree)
+    public override void SetFamilyTree(IFamilyTreeStoreBaseClass inFamilyTree)
     {
       trace.TraceInformation("RelationFinderPanel::SetFamilyTree():" + DateTime.Now);
 
@@ -479,7 +479,7 @@ namespace FamilyStudioFormsGui.WindowsGui.Panels.RelationFinderPanel
     string startPerson1Xref;
     string startPerson2Xref;
     private TraceSource trace;
-    private FamilyTreeStoreBaseClass familyTree;
+    private IFamilyTreeStoreBaseClass familyTree;
     private int noOfGenerations;
     private RelationStackList relationList;
 
@@ -494,7 +494,7 @@ namespace FamilyStudioFormsGui.WindowsGui.Panels.RelationFinderPanel
       string startPerson1Xref,
       string startPerson2Xref,
       int noOfGenerations,
-      FamilyTreeStoreBaseClass familyTree)
+      IFamilyTreeStoreBaseClass familyTree)
     {
       trace = new TraceSource("RelationTreeWorker", SourceLevels.Information);
 

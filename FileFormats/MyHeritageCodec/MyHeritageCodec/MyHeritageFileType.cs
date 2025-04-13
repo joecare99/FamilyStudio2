@@ -32,7 +32,7 @@ namespace FamilyStudioData.FileFormats.MyHeritageCodec
       return false;
     }
 
-    public override FamilyTreeStoreBaseClass CreateFamilyTreeStore(String fileName, CompletedCallback callback)
+    public override IFamilyTreeStoreBaseClass CreateFamilyTreeStore(String fileName, CompletedCallback callback)
     {
       FamilyTreeStoreMyHeritage webStore = new FamilyTreeStoreMyHeritage();
 
@@ -43,10 +43,10 @@ namespace FamilyStudioData.FileFormats.MyHeritageCodec
 
       webStore.SetFile(fileName);
       callback(true);
-      return (FamilyTreeStoreBaseClass)webStore;
+      return (IFamilyTreeStoreBaseClass)webStore;
     }
 
-    public override bool OpenFile(String fileName, ref FamilyTreeStoreBaseClass inFamilyTree, CompletedCallback callback)
+    public override bool OpenFile(String fileName, ref IFamilyTreeStoreBaseClass inFamilyTree, CompletedCallback callback)
     {
       FamilyTreeStoreMyHeritage myHeritageStore = (FamilyTreeStoreMyHeritage)inFamilyTree;
 

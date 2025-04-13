@@ -18,7 +18,7 @@ namespace FamilyStudioData.FileFormats.TextCodec
   public class TextDecoder : FamilyFileTypeBaseClass
   {
     private static TraceSource trace = new TraceSource("TextDecoder", SourceLevels.Warning);
-    private FamilyTreeStoreBaseClass familyTree;
+    private IFamilyTreeStoreBaseClass familyTree;
     private BackgroundWorker backgroundWorker;
     private bool printMemory;
     private FileBufferClass fileBuffer;
@@ -55,10 +55,10 @@ namespace FamilyStudioData.FileFormats.TextCodec
     class XrefMapList
     {
       private IDictionary<string, XrefMapClass> xrefMap;
-      private FamilyTreeStoreBaseClass familyTree;
+      private IFamilyTreeStoreBaseClass familyTree;
       private XrefType type;
 
-      public XrefMapList(FamilyTreeStoreBaseClass familyTree, XrefType type)
+      public XrefMapList(IFamilyTreeStoreBaseClass familyTree, XrefType type)
       {
         xrefMap = new Dictionary<string, XrefMapClass>();
         this.familyTree = familyTree;
@@ -125,10 +125,10 @@ namespace FamilyStudioData.FileFormats.TextCodec
 
     class XrefMapLists
     {
-      private FamilyTreeStoreBaseClass familyTree;
+      private IFamilyTreeStoreBaseClass familyTree;
       private IDictionary<XrefType, XrefMapList> xrefLists;
 
-      public XrefMapLists(FamilyTreeStoreBaseClass familyTree)
+      public XrefMapLists(IFamilyTreeStoreBaseClass familyTree)
       {
         this.familyTree = familyTree;
         xrefLists = new Dictionary<XrefType, XrefMapList>();
@@ -401,7 +401,7 @@ namespace FamilyStudioData.FileFormats.TextCodec
 
     
 
-    public bool ReadFile(String fileName, ref FamilyTreeStoreBaseClass inFamilyTree)
+    public bool ReadFile(String fileName, ref IFamilyTreeStoreBaseClass inFamilyTree)
     {
       printMemory = false;// true;
 
@@ -1138,14 +1138,14 @@ namespace FamilyStudioData.FileFormats.TextCodec
       return false;
     }
 
-    public override FamilyTreeStoreBaseClass CreateFamilyTreeStore(String fileName, CompletedCallback callback)
+    public override IFamilyTreeStoreBaseClass CreateFamilyTreeStore(String fileName, CompletedCallback callback)
     {
       trace.TraceInformation("TextDecoder::CreateFamilyTreeStore( " + fileName + ")");
       callback(true);
       return null; // new FamilyTreeStoreRam();
     }
 
-    public override bool OpenFile(String fileName, ref FamilyTreeStoreBaseClass inFamilyTree, CompletedCallback callback)
+    public override bool OpenFile(String fileName, ref IFamilyTreeStoreBaseClass inFamilyTree, CompletedCallback callback)
     {
       trace.TraceInformation("TextDecoder::OpenFile( " + fileName + ")");
       bool result = ReadFile(fileName, ref inFamilyTree);

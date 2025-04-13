@@ -212,7 +212,7 @@ namespace FamilyStudioFormsGui.WindowsGui.Panels.TreeViewPanel4
   class TreeViewPanel4 : TreeViewPanelBaseClass
   {
     private static TraceSource trace = new TraceSource("TreeViewPanel4", SourceLevels.Warning);
-    private FamilyTreeStoreBaseClass familyTree;
+    private IFamilyTreeStoreBaseClass familyTree;
     private IndividualClass selectedIndividual;
     private FamilyClass selectedFamily;
     private IList<Control> controlList;
@@ -252,7 +252,7 @@ namespace FamilyStudioFormsGui.WindowsGui.Panels.TreeViewPanel4
 
 
 
-    public override void SetFamilyTree(FamilyTreeStoreBaseClass inFamilyTree)
+    public override void SetFamilyTree(IFamilyTreeStoreBaseClass inFamilyTree)
     {
       trace.TraceInformation("TreeViewPanel4::SetFamilyTree()");
 

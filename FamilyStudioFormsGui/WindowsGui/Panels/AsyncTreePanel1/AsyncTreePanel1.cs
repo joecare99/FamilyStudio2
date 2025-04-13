@@ -20,7 +20,7 @@ namespace FamilyStudioFormsGui.WindowsGui.Panels.AsyncTreePanel1
   class AsyncTreePanel1 : TreeViewPanelBaseClass
   {
     private static TraceSource trace = new TraceSource("AsyncTreePanel1", SourceLevels.Warning);
-    private FamilyTreeStoreBaseClass familyTree;
+    private IFamilyTreeStoreBaseClass familyTree;
     private IndividualClass selectedIndividual;
     private string prevSelectedIndividual;
     private IDictionary<string, IndividualButton> personControlList;
@@ -134,12 +134,12 @@ namespace FamilyStudioFormsGui.WindowsGui.Panels.AsyncTreePanel1
     {
       static TraceSource trace = new TraceSource("FindPersonThread", SourceLevels.Warning);
       private BackgroundWorker backgroundWorker;
-      private FamilyTreeStoreBaseClass familyTree;
+      private IFamilyTreeStoreBaseClass familyTree;
       private HandleNewIndividual personCallback;
       private string personXref;
 
 
-      public FindPersonThread(FamilyTreeStoreBaseClass familyTree, string personXref, HandleNewIndividual individualCallback)
+      public FindPersonThread(IFamilyTreeStoreBaseClass familyTree, string personXref, HandleNewIndividual individualCallback)
       {
         this.familyTree = familyTree;
         backgroundWorker = new BackgroundWorker();
@@ -190,12 +190,12 @@ namespace FamilyStudioFormsGui.WindowsGui.Panels.AsyncTreePanel1
     {
       static TraceSource trace = new TraceSource("FindFamilyThread", SourceLevels.Warning);
       private BackgroundWorker backgroundWorker;
-      private FamilyTreeStoreBaseClass familyTree;
+      private IFamilyTreeStoreBaseClass familyTree;
       private HandleNewFamily familyCallback;
       private string familyXref;
 
 
-      public FindFamilyThread(FamilyTreeStoreBaseClass familyTree, string familyXref, HandleNewFamily familyCallback)
+      public FindFamilyThread(IFamilyTreeStoreBaseClass familyTree, string familyXref, HandleNewFamily familyCallback)
       {
         this.familyTree = familyTree;
         backgroundWorker = new BackgroundWorker();
@@ -424,7 +424,7 @@ namespace FamilyStudioFormsGui.WindowsGui.Panels.AsyncTreePanel1
       parentForm.SelectedPersonChanged += OnSelectedPersonChangedEvent;
     }
 
-    public FamilyTreeStoreBaseClass GetFamilyTree()
+    public IFamilyTreeStoreBaseClass GetFamilyTree()
     {
       return familyTree;
     }
@@ -443,7 +443,7 @@ namespace FamilyStudioFormsGui.WindowsGui.Panels.AsyncTreePanel1
       }
     }
 
-    public override void SetFamilyTree(FamilyTreeStoreBaseClass inFamilyTree)
+    public override void SetFamilyTree(IFamilyTreeStoreBaseClass inFamilyTree)
     {
       trace.TraceInformation("SetFamilyTree()");
 

@@ -15,7 +15,7 @@ using FamilyStudioData.FamilyTreeStore;
 
 namespace FamilyStudioData.FileFormats.AnarkivCodec
 {
-  public class FamilyTreeStoreAnarkiv : FamilyTreeStoreBaseClass, IDisposable
+  public class FamilyTreeStoreAnarkiv : IFamilyTreeStoreBaseClass, IDisposable
   {
     private static TraceSource trace = new TraceSource("FamilyTreeStoreAnarkiv", SourceLevels.Warning);
     private class AnarkivFamilyRelations : Object

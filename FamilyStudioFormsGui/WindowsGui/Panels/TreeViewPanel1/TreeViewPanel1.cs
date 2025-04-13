@@ -15,7 +15,7 @@ namespace FamilyStudioFormsGui.WindowsGui.Panels.TreeViewPanel1
   class TreeViewPanel1 : TreeViewPanelBaseClass
   {
     private static TraceSource trace = new TraceSource("TreeViewPanel", SourceLevels.Warning);
-    private FamilyTreeStoreBaseClass familyTree;
+    private IFamilyTreeStoreBaseClass familyTree;
     private IndividualClass selectedIndividual;
     private FamilyLayout layout;
     bool layoutDone;
@@ -37,7 +37,7 @@ namespace FamilyStudioFormsGui.WindowsGui.Panels.TreeViewPanel1
       trace.TraceEvent(TraceEventType.Information, 0, "PasteFromClipboard:" + clipboard);
     }
 
-    public override void SetFamilyTree(FamilyTreeStoreBaseClass inFamilyTree)
+    public override void SetFamilyTree(IFamilyTreeStoreBaseClass inFamilyTree)
     {
       trace.TraceInformation("TreeViewPanel1::SetFamilyTree()");
 

@@ -61,7 +61,7 @@ namespace FamilyStudioData.FamilyTreeStore
     SpouseFamily = 0x0004,
     ChildFamily  = 0x0008,
   }
-  public interface FamilyTreeStoreBaseClass
+  public interface IFamilyTreeStoreBaseClass
   {
 
     // Family interface

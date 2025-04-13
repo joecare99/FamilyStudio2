@@ -18,7 +18,7 @@ namespace FamilyStudioFormsGui.WindowsGui.Panels.SearchPanel1
 {
   class SearchPanel1 : TreeViewPanelBaseClass
   {
-    private FamilyTreeStoreBaseClass familyTree;
+    private IFamilyTreeStoreBaseClass familyTree;
     private IList<Control> controlList;
     private FamilyForm2 parentForm;
     private ComboBox searchTextBox;
@@ -187,7 +187,7 @@ namespace FamilyStudioFormsGui.WindowsGui.Panels.SearchPanel1
       }
     }
 
-    void SearchTree(FamilyTreeStoreBaseClass familyTree, String searchString)
+    void SearchTree(IFamilyTreeStoreBaseClass familyTree, String searchString)
     {
       IEnumerator<IndividualClass> iterator;
 
@@ -281,7 +281,7 @@ namespace FamilyStudioFormsGui.WindowsGui.Panels.SearchPanel1
 
 
 
-    public override void SetFamilyTree(FamilyTreeStoreBaseClass inFamilyTree)
+    public override void SetFamilyTree(IFamilyTreeStoreBaseClass inFamilyTree)
     {
       trace.TraceInformation("SearchPanel1::SetFamilyTree():" + DateTime.Now);
 
@@ -319,7 +319,7 @@ namespace FamilyStudioFormsGui.WindowsGui.Panels.SearchPanel1
     {
       private BackgroundWorker backgroundWorker;
       private DateTime startTime;
-      FamilyTreeStoreBaseClass familyTree;
+      IFamilyTreeStoreBaseClass familyTree;
       ProgressReporterInterface progressReporter;
       string searchString;
       private TraceSource trace;
@@ -329,7 +329,7 @@ namespace FamilyStudioFormsGui.WindowsGui.Panels.SearchPanel1
         SearchPanel1 sender,
         ProgressReporterInterface progress,
         string searchString,
-        ref FamilyTreeStoreBaseClass familyTree)
+        ref IFamilyTreeStoreBaseClass familyTree)
       {
         trace = new TraceSource("TreeWorker", SourceLevels.Warning);
         parentWindow = sender;

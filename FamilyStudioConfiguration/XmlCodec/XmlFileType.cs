@@ -31,7 +31,7 @@ namespace FamilyStudioData.FileFormats.XmlCodec
       return false;
     }
 
-    public override FamilyTreeStoreBaseClass CreateFamilyTreeStore(String fileName, CompletedCallback callback)
+    public override IFamilyTreeStoreBaseClass CreateFamilyTreeStore(String fileName, CompletedCallback callback)
     {
       FamilyTreeStoreRam ramStore = new FamilyTreeStoreRam();
 
@@ -41,10 +41,10 @@ namespace FamilyStudioData.FileFormats.XmlCodec
 
       //ramStore.SetFile(fileName);
       callback(true);
-      return (FamilyTreeStoreBaseClass)ramStore;
+      return (IFamilyTreeStoreBaseClass)ramStore;
     }
 
-    public override bool OpenFile(String fileName, ref FamilyTreeStoreBaseClass inFamilyTree, CompletedCallback callback)
+    public override bool OpenFile(String fileName, ref IFamilyTreeStoreBaseClass inFamilyTree, CompletedCallback callback)
     {
       //FamilyTreeStoreRam ramStore = (FamilyTreeStoreRam)inFamilyTree;
 
@@ -57,7 +57,7 @@ namespace FamilyStudioData.FileFormats.XmlCodec
         DataContractSerializer serializer = new DataContractSerializer(inFamilyTree.GetType());
         try
         {
-          inFamilyTree = (FamilyTreeStoreBaseClass)serializer.ReadObject(fileStream);
+          inFamilyTree = (IFamilyTreeStoreBaseClass)serializer.ReadObject(fileStream);
         }
         catch (SerializationException e)
         {
